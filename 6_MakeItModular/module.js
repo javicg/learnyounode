@@ -5,11 +5,8 @@ module.exports = function handleFilesWithExtensionOnPath(pathName, extension, ca
 	fs.readdir(pathName, function(err, list) {
 		if (err)
 			return callback(err)
-		var filesWithExtension = []
-		list.forEach(function(file) {
-			if (path.extname(file) === "." + extension) {
-				filesWithExtension.push(file)
-			}
+		var filesWithExtension = list.filter(function(file) {
+			return path.extname(file) === "." + extension
 		})
 		callback(null, filesWithExtension)
 })
